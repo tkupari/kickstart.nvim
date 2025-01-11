@@ -879,7 +879,13 @@ require('lazy').setup({
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
+      local gen_spec = require('mini.ai').gen_spec
+      require('mini.ai').setup {
+        n_lines = 500,
+        custom_textobjects = {
+          f = gen_spec.treesitter { a = '@function.outer', i = '@function.inner' },
+        },
+      }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
